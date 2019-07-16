@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="">
+    <title>Title</title>
+    <style>
+        div{width:1200px;;height:500px;margin:auto;}
+        div img{max-width:100%;}
+        @media screen and (max-width:1900px) and (min-width:1200px){
+            div{width:850px;height:400px;border:3px solid #0f0;}
+            body{background:#00f;}
+        }
+        @media screen and (max-width:1200px) and (min-width:800px) {
+            div{width:750px;height:300px;border:2px solid #f00;}
+            body{background:#0f0;}
+        }
+        @media screen and (max-width:800px){
+            div{width:600px;height:200px;border:1px solid #00f; }
+            body{background:#f00;}
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="image/b3.jpg" alt="">
+    </div>
+</body>
+</html>
