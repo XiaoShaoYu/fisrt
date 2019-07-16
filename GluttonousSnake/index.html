@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <!--
-*名称：贪吃蛇
-*作者：雷东升
-*邮箱：leids@foxmail.com
-*描述：
 经典的贪吃蛇游戏，使用面向过程的方法实现。通过方向键控制蛇的移动，吃到“果子”后身体会自动变长。其实在游戏中并不存在运动元素，整个地图是一个大table，而蛇是一个由td元素组成的数组对象，通过设置数组中各个td的背景色来生成“蛇”。在方向键onmousedown的时候，通过在数组头部添加td、在尾部删除td来模拟运动效果。
 -->
 <html>
@@ -18,12 +14,12 @@
 
 (function reset(){
 
-	var oTa=document.createElement('table');
-	var oTb=document.createElement('tbody');
-  var index = 0;
-  var snakeMove = null;
-  var timer = null;
-
+	var oTa=document.createElement('table');//创建一个地图
+	var oTb=document.createElement('tbody');//创建可移动范围
+  	var index = 0;
+  	var snakeMove = null;
+  	var timer = null;
+//创建一个40*40的地图并添加到文档中
 	for(var i=0;i<40;i++){
 
 		var oTr=document.createElement('tr');
@@ -32,7 +28,7 @@
 
 			var oTd=document.createElement('td');
 
-			oTd.style.cssText='width:8px; height:8px; padding:0; border: 2p solid #ccc; background: #ccc;';
+			oTd.style.cssText='width:8px; height:8px; padding:0; border: 2p solid #ccc; background: #ccc;';//给定好border，方便更好的修改
 			oTr.appendChild(oTd);
 		}
 
@@ -43,53 +39,51 @@
 	oTa.style.cssText='margin:60px auto 0; border:10px solid #333; background:#ccc;';
 
 	document.body.appendChild(oTa);
-  oTa.cellSpacing = '2';
+  	oTa.cellSpacing = '2';//给每个单元格之间的距离为2
 
-	var aTd=oTb.getElementsByTagName('td');
+	var aTd=oTb.getElementsByTagName('td');//获取所有td
 
+    //创建随机果子的函数
 	fruit();
-
 	function fruit(){
-
-		var num=Math.floor(Math.random()*aTd.length);
-
+		var num=Math.floor(Math.random()*aTd.length);//获得一个0~ aTd.length的随机数
 		if(num!=index){
-
-      index = num;
+      		index = num;
 		 	aTd[index].style.cssText='border: 2px solid #333; background: red;';
-
+			//如果随机数不等于0,就给他设置border为红色,即为果子
 		}else{
 
 			fruit();
 		}
 	}
-
+    //创建蛇的初始位置
 	snake();
-
 	function snake(){
 
-		var rows=oTb.rows;
+		var rows=oTb.rows;//获得表格（地图）所有行的集合
 		var arr=[]
-
+		//console.log(rows.length)
+		//创建蛇的初始位置
 		litleSnake();
 
 		function litleSnake(){
 
 			var ini=rows.length/2-1;
 
-      arr = [[ini,ini+1]]
+      		arr = [[ini,ini+1]]//这是贪吃蛇的开始位置
 
 			snakeColor(arr);
 		}
-
+		//给蛇赋予不一样的颜色
 		function snakeColor(arr){
-
+			//
 			for(var i=1;i<arr.length;i++){
 
 				rows[arr[i][0]].cells[arr[i][1]].style.cssText='background: #555; border: 2px solid #333;';
 			}
 
 			rows[arr[0][0]].cells[arr[0][1]].style.cssText='background: #eee; border: 2px solid #333;';
+			
 		}
 
 		var json={
@@ -104,29 +98,29 @@
 		document.onkeydown=function (ev){
 
 			var ev=ev||event;
-
+			//判断按下的键值是不是等于上、下、左、右四个键的键码值
 			for(var i=37;i<41;i++){
 
 				if(ev.keyCode==i && ev.keyCode!=aDir[0]){
 
 					aDir.unshift(ev.keyCode);
+					console.log(ev.keyCode);
 					break;
 				}
 			}
 
 			aDir.length=2;
-
-			if(Math.abs(aDir[0]-aDir[1])==2)return;
-
+			if(Math.abs(aDir[0]-aDir[1])==2)return;//判断使用者按下方向的不是和当前蛇地方向相反
+			
 			switch(ev.keyCode){
 
-        case 32:
-          timer ? (function(){clearInterval(timer);timer=null;})() : snakeMove && snakeMove();
-          break;
+        	case 32://当开始游戏后，使用者按下空格时取消蛇的运动,并给timer赋null,当使用者再次按下空格时,判断运动函数是否存在,并运行
+          		timer ? (function(){clearInterval(timer);timer=null;})() : snakeMove && snakeMove();
+          		break;
 
 				case 37:
 
-					if(!json.left.key)return;
+					if(!json.left.key)return;//判断json.left.key是否为true
 					onOff('left');
 					fnTimer('left',0,-1);
 					break;
@@ -161,7 +155,7 @@
 
 				if(i==dir){
 
-					json[i].key=false;
+					json[i].key=false;//当按下上、下、左、右开始游戏时,把相应的key设置为false
 
 				}else{
 
@@ -173,12 +167,12 @@
 
 		function fnTimer(dir,m,n){
 
-      snakeMove = function(){ fnTimer(dir,m,n) };
+      	snakeMove = function(){ fnTimer(dir,m,n) };
 
 			timer=setInterval(function (){
 
 				if(arr[0][0]+m<0||arr[0][1]+n<0||arr[0][0]+m>39||arr[0][1]+n>39){
-
+//判断蛇是否死亡,
 					clearInterval(timer);
 					fail();
 					return;
@@ -187,20 +181,20 @@
 				for(var i=2;i<arr.length;i++){
 
 					if( arr[0][0]+m==arr[i][0] && arr[0][1]+n==arr[i][1] ){
-
+						//判断蛇是否撞到自己身上
 						clearInterval(timer);
 						fail();
 					}
 				}
 
 				arr.unshift([arr[0][0]+m,arr[0][1]+n]);
+				//添加按下方向键后蛇应该在的位置,
 
 				if(rows[arr[0][0]].cells[arr[0][1]].style.backgroundColor!='red'){
-
+//判断蛇的位置当前背景颜色不为红色,为红色就重新创建一个td的背景色为红色,不为红色就调用snakeTail函数
 					snakeTail();
-
+					
 				}else{
-
 					fruit();
 				}
 
@@ -211,14 +205,15 @@
 
 			alert('任务失败！');
 			document.body.removeChild(oTa);
-			reset();
+			reset();//重新渲染页面
 		}
 
 		function snakeTail(){
 
 			rows[arr[arr.length-1][0]].cells[arr[arr.length-1][1]].style.cssText='background: #ccc; border: 2px solid #ccc;';
-			arr.pop(arr[arr.length-1]);
-			snakeColor(arr);
+			//移动前蛇末尾的td地颜色该为和地图一个颜色，然后蛇前面的td改为蛇头的颜色，让人看上去就像蛇在移动一样
+			arr.pop(arr[arr.length-1]);//删除数组中被修改成地图一个颜色的td
+			snakeColor(arr);//遍历当前蛇的td,并修改颜色
 		}
 	}
 
