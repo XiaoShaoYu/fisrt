@@ -2,7 +2,7 @@
 a{text-decoration:none;}
 li{list-style:none;}
 /* 页头 */
-header{width:100%;background:#efefef;color:#565353;font-size:12px;height:40px;line-height:40px;}
+header{width:100%;background:#efefef;color:#565353;font-size:12px;height:40px;line-height:40px;min-width:1200px;}
 header .H-con{width:1200px;margin:auto;}
 
 .H-con .H-left{float:left;}
@@ -29,9 +29,8 @@ nav .N-con{width:1200px;margin:auto;}
 
 /*  轮播  */
 
-.banner{width:100%;height:600px;position:relative;overflow:hidden;top:0px;left:0;overflow: hidden;}
-
-.box1 {position: relative;width: 100%;margin: 0 auto 0px auto;max-width: 1920px;}
+.banner{width:100%;height:600px;position:relative;overflow:hidden;top:0px;left:0;overflow: hidden;min-width: 1200px;}
+.box1 {position: relative;width: 100%;margin: 0 auto 0px auto;}
 
 li {float: left;list-style: none;}
 ol {height: 35px;position: absolute;bottom: 10px;left:50%;margin-left:-27px;width:185px;text-align:center;}
@@ -118,7 +117,7 @@ width: 50px; height: 45px;text-align: center;line-height: 80px;}
 
 /*  footer  */
 
-footer{width:100%;height:420px;background:#2c2c2c;margin-top:70px;}
+footer{width:100%;height:420px;background:#2c2c2c;margin-top:70px;min-width:1200px;}
 footer .F-top{width:1200px;height:380px;margin:auto;overflow: hidden;}
 
 
@@ -148,5 +147,5 @@ footer .F-top{width:1200px;height:380px;margin:auto;overflow: hidden;}
 
 /*    */
 
-footer .F-bottom{width:100%;background:#000;height:40px;}
+footer .F-bottom{width:100%;background:#000;height:40px;min-width:1200px;}
 .F-bottom div{width:1200px;margin:auto;color:#c8c7c7;font-size:12px;line-height:40px;text-align: center}
