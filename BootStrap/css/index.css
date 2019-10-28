@@ -34,7 +34,7 @@ max-width: 310px;margin-bottom: 30px;border-radius: 0;height: 336px;}
 .caption a:hover{text-decoration: none;}
 .caption a span{display:block;margin-top:-5px;;color:#666;font-size:15.6;}
 .caption a span:hover{color:none;}
-.caption p{margin-top:15px;width: 240px;text-align: center;font-size:14px;padding:0 6px;}
+.caption p{margin-top:15px;text-align: center;font-size:14px;padding:0 6px;}
 
 footer{width:100%;margin-top:50px;border-top:1px solid #eee;}
 footer .row{border-bottom:1px solid #eee;}
